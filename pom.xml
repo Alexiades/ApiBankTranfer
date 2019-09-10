@@ -15,20 +15,31 @@
         </repository>
     </repositories>
 
+
+    <properties>
+        <resteasy.version>3.0.14.Final</resteasy.version>
+    </properties>
+
     <dependencies>
 
-        <!--resteasy-->
+        <!--resteasy
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxrs</artifactId>
-            <version>3.1.4.Final</version>
+            <version>${resteasy.version}</version>
         </dependency>
-
+-->
         <!--rest-easy client-->
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client</artifactId>
-            <version>3.1.4.Final</version>
+            <version>${resteasy.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-servlet-initializer</artifactId>
+            <version>${resteasy.version}</version>
         </dependency>
 
         <!--unit test-->
@@ -38,7 +49,6 @@
             <version>4.8.2</version>
             <scope>test</scope>
         </dependency>
-
 
     </dependencies>
 
