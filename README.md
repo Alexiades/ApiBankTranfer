@@ -15,7 +15,7 @@ Main Functionality:
 
 ![alt text](https://github.com/Alexiades/ApiBankTranfer/blob/master/Readme_schemes/General%20Transfer.png)
 
-Send Tranfer:
+Send Transfer:
 
 ![alt text](https://github.com/Alexiades/ApiBankTranfer/blob/master/Readme_schemes/sendApi.png)
 
