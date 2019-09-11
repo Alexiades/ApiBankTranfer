@@ -13,11 +13,11 @@ Not define Jet
 
 Main Functionality:
 
-![alt text](http://prntscr.com/p4xhrh)
+![alt text](https://github.com/Alexiades/ApiBankTranfer/blob/master/Readme_schemes/General%20Transfer.png)
 
 Send Tranfer:
 
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/Alexiades/ApiBankTranfer/blob/master/Readme_schemes/sendApi.png)
 
  JSON Structure
 
@@ -46,7 +46,7 @@ Send Tranfer:
 
 ## Contributing
 
-Please read [CONTRIBUTING.md] for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/google/libphonenumber/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
