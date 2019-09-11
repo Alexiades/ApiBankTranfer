@@ -19,16 +19,39 @@ Send Tranfer:
 
 ![alt text](http://url/to/img.png)
 
-JSON
+ JSON Structure
+
+ ```
+	{
+	   "FirstName":"Alex",
+	   "LastName":"Alexiades",
+	   "Currency":"Eur",
+	   "Country":"Spain",
+	   "TransfereAccountNumberTo":"ES..",
+	   "TransfereAccountNumberFrom":"ES..",
+	   "TransferDate":"Sysdate"
+       "Amount":"9999"
+       "Comment":"You own it"
+	}
+
+```
 
 ```Java
 
 ```
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+## Built With
 
-## Test
+* [Java](https://maven.apache.org/) - Dependency Management
+
+## Contributing
+
+Please read [CONTRIBUTING.md] for details on our code of conduct, and the process for submitting pull requests to us.
+
+## Authors
+
+* **Alejandro Alexiades**
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
