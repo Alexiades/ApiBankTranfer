@@ -1,20 +1,17 @@
 package com.alexiades.rest; // Note your package will be {{ groupId }}.rest
 
-import com.alexiades.model.Transfer;
+import com.alexiades.model.Product;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.HashMap;
-import java.util.Map;
 
 //Sets the path to base URL + /hello
 //example http://localhost:9090/rest/hello/JavaCodeGeeks?queryParameter=Enjoy%20RESTEasy
 
 @Path("/hello")
 public class ApiRestService {
-
-    private Map<String, Transfer> inventory = new HashMap<String, Transfer>();
 /*
+    private Map<String, Product> inventory = new HashMap<String, Product>();
+
     @GET
     @Path("/getinfo")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
@@ -29,7 +26,7 @@ public class ApiRestService {
 // It's works, I need now to think about the structure of the api
 //example http://localhost:9090/rest/hello/JavaCodeGeeks?queryParameter=Enjoy%20RESTEasy
 //response :
-
+/*
     @GET
     @Path("/{pathParameter}")
     public Response responseMsg( @PathParam("pathParameter") String pathParameter,
@@ -39,18 +36,30 @@ public class ApiRestService {
 
         return Response.status(200).entity(response).build();
     }
+*/
 
-    @POST
-    @Path("/addmovie")
-    @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Response addMovie(Transfer movie) {
-        if (null != inventory.get(movie.getImdbId())) {
-            return Response
-                    .status(Response.Status.NOT_MODIFIED)
-                    .entity("com.alexiades.model.Movie is Already in the database.").build();
+    //http://localhost:9090/rest/hello/get
+        @GET
+        @Path("/get")
+        @Produces("application/json")
+        public String getProductInJSON() {
+
+            Product product = new Product();
+            product.setName("iPad 3");
+            product.setQty(999);
+
+            return product.toString();
+
         }
 
-        inventory.put(movie.getImdbId(), movie);
-        return Response.status(Response.Status.CREATED).build();
+//http://localhost:9090/rest/hello/post
+    @POST
+    @Path("/post")
+    @Consumes("application/json")
+    public Response createProductInJSON(Product product) {
+
+        String result = "Product created : " + product;
+        return Response.status(201).entity(result).build();
+
     }
 }

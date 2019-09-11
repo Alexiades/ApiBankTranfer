@@ -26,7 +26,7 @@ public class ApiRestServiceTest {
     public void helloTest() {
         try {
             // Specify the endpoint we want to test, for our example, we use "/hello"
-            MockHttpRequest request = MockHttpRequest.get("/hello");
+            MockHttpRequest request = MockHttpRequest.get("/hello/get");
             MockHttpResponse response = new MockHttpResponse();
             // Invoke the request
             dispatcher.invoke(request, response);
@@ -34,7 +34,7 @@ public class ApiRestServiceTest {
             Assert.assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 
             // Check that the message we receive is "hello"
-            Assert.assertEquals("hello", response.getContentAsString());
+            Assert.assertEquals("Product [name=iPad 3, qty=999]", response.getContentAsString());
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

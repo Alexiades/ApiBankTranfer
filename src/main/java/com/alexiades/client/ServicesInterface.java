@@ -1,7 +1,7 @@
 
 package com.alexiades.client;
 
-import com.alexiades.model.Transfer;
+import com.alexiades.model.Product;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -13,25 +13,25 @@ public interface ServicesInterface {
     @GET
     @Path("/getinfo")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    Transfer movieByImdbId(@QueryParam("imdbId") String imdbId);
+    Product getinfo(@QueryParam("trans") String trans);
 
     @GET
-    @Path("/listmovies")
+    @Path("/listransfers")
     @Produces({ "application/json" })
-    List<Transfer> listMovies();
+    List<Product> listransfers();
 
     @POST
-    @Path("/addmovie")
+    @Path("/addtransfer")
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    Response addMovie(Transfer movie);
+    Response addtransfer(Product movie);
 
     @PUT
-    @Path("/updatemovie")
+    @Path("/updatetransfer")
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    Response updateMovie(Transfer movie);
+    Response updatetransfer(Product movie);
 
     @DELETE
-    @Path("/deletemovie")
-    Response deleteMovie(@QueryParam("imdbId") String imdbId);
+    @Path("/deletetransfer")
+    Response deleteMovie(@QueryParam("trans") String trans);
 
 }
