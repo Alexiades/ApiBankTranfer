@@ -43,6 +43,9 @@ Send Tranfer:
 ## Built With
 
 * [Java](https://maven.apache.org/) - Dependency Management
+* [RESTEasy](https://resteasy.github.io/) - Api RESTful Library
+* [JSON](https://www.json.org) - Data interchange format
+* [JUnit](https://junit.org/junit5/) - Unit testing framework 
 
 ## Contributing
 
