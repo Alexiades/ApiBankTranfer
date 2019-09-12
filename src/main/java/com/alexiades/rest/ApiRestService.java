@@ -16,7 +16,7 @@ import java.io.IOException;
 //Sets the path to base URL + /hello
 //example http://localhost:9090/rest/hello/JavaCodeGeeks?queryParameter=Enjoy%20RESTEasy
 
-@Path("/hello")
+@Path("/")
 public class ApiRestService {
 /*
     private Map<String, Product> inventory = new HashMap<String, Product>();
@@ -49,9 +49,10 @@ public class ApiRestService {
 
     //http://localhost:9090/rest/hello/get
     @GET
-    @Path("/get")
+    @Path("/account")
     @Produces("application/json")
-    public String getProductInJSON() {
+    public String getAccount(@DefaultValue("Nothing to say") @QueryParam("queryParameter") String account) {
+        String response = "Hello from: " + account;
 
                     //Transaction transaction = new Transaction();
                     Transaction transaction = new Transaction();
