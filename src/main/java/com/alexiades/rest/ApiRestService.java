@@ -1,8 +1,17 @@
 package com.alexiades.rest; // Note your package will be {{ groupId }}.rest
 
-import com.alexiades.model.Product;
+import com.alexiades.model.Transaction;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import com.alexiades.exception.CustomException;
+import com.alexiades.model.CurrencyValidator;
+import com.alexiades.model.Transaction;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 
 //Sets the path to base URL + /hello
 //example http://localhost:9090/rest/hello/JavaCodeGeeks?queryParameter=Enjoy%20RESTEasy
@@ -39,27 +48,112 @@ public class ApiRestService {
 */
 
     //http://localhost:9090/rest/hello/get
-        @GET
-        @Path("/get")
-        @Produces("application/json")
-        public String getProductInJSON() {
+    @GET
+    @Path("/get")
+    @Produces("application/json")
+    public String getProductInJSON() {
 
-            Product product = new Product();
-            product.setName("iPad 3");
-            product.setQty(999);
+                    //Transaction transaction = new Transaction();
+                    Transaction transaction = new Transaction();
 
-            return product.toString();
 
-        }
+                    return transaction.toString();
 
-//http://localhost:9090/rest/hello/post
-    @POST
-    @Path("/post")
-    @Consumes("application/json")
-    public Response createProductInJSON(Product product) {
-
-        String result = "Product created : " + product;
-        return Response.status(201).entity(result).build();
 
     }
+
+    //way 1
+
+        /*
+Example
+
+    var data = {
+            "1": {
+        "account": "11"
+    },
+            "2": {
+        "account": "22"
+    }
+};
+*/
+
+
+
+    //http://localhost:9090/rest/hello/get
+    @POST
+    @Path("/transfer")
+    @Produces("application/json")
+    public String postTransfer() {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Transaction transaction = new Transaction();
+        String account = "";
+
+        {
+            try {
+                JsonNode data = objectMapper.readTree("target/json_db.json");
+                if (accoutExist(data,account) == true) {
+
+                    return transaction.toString();
+
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return transaction.toString();
+
+    }
+
+    public boolean accoutExist(JsonNode d,String acc) {
+
+        d.get(acc);
+
+        return true;
+
+    }
+
+     //way 2
+
+    @Path("/transaction")
+    @Produces(MediaType.APPLICATION_JSON)
+    public class TransactionService {
+
+        //private final DAOFactory daoFactory = DAOFactory.getDAOFactory(DAOFactory.H2);
+
+        /**
+         * Transfer fund between two accounts.
+         *
+         * @param transaction
+         * @return
+         * @throws CustomException
+         */
+        @POST
+        public Response transferFund(Transaction transaction) throws CustomException {
+
+            String currency = transaction.getCurrencyCode();
+            if (CurrencyValidator.validateCcyCode(currency)) {
+/*                int updateCount = daoFactory.getAccountDAO().transferAccountBalance(transaction);
+                if (updateCount == 2) {
+                    return Response.status(Response.Status.OK).build();
+                } else {
+                    // transaction failed
+                    throw new WebApplicationException("Transaction failed", Response.Status.BAD_REQUEST);
+                }
+*/
+                return Response.status(Response.Status.OK).build();
+
+
+            } else {
+                throw new WebApplicationException("Currency Code Invalid ", Response.Status.BAD_REQUEST);
+            }
+
+        }
+    }
 }
+
+
+
+

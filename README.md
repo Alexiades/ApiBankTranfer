@@ -1,31 +1,68 @@
 # ApiBankTranfer
 Api for make transfers between differents accounts.
 
-## Installation
+### How to run
 
-
-
-```bash
-Not define Jet
+```sh
+mvn exec:java
 ```
+
+### Available Services
+
+| HTTP METHOD | PATH | USAGE |
+| -----------| ------ | ------ |
+| GET | /account/{accountId} | get account by accountId | 
+| POST | /transaction | perform transaction between 2 user accounts | 
+
+
+### Http Status
+- 200 OK: The request has succeeded
+- 400 Bad Request: The request could not be understood by the server 
+- 404 Not Found: The requested resource cannot be found
+- 500 Internal Server Error: The server encountered an unexpected condition 
+
 
 ## Usage
 
 Main Functionality:
 
-![alt text](https://github.com/Alexiades/ApiBankTranfer/blob/master/Readme_schemes/General%20Transfer.png)
+![alt text](https://github.com/Alexiades/ApiBankTranfer/blob/master/Readme_schemes/GeneralTransfer.png)
 
 Send Transfer:
 
 ![alt text](https://github.com/Alexiades/ApiBankTranfer/blob/master/Readme_schemes/sendApi.png)
 
  JSON Structure
+ 
+ 
+### Sample JSON for User and Account
+ 
+ ##### User : 
+ ```sh
+ {  
+   "userName":"test1",
+   "emailAddress":"test1@gmail.com"
+ } 
+ ```
+ 
+##### User Account: : 
+
+```sh
+{  
+   "userName":"test1",
+   "balance":10.0000,
+   "currencyCode":"GBP"
+} 
+```
+
+ 
+#### User Transaction:
 
  ```
 	{
 	   "FirstName":"Alex",
 	   "LastName":"Alexiades",
-	   "Currency":"Eur",
+	   "Currency":"EUR",
 	   "Country":"Spain",
 	   "TransfereAccountNumberTo":"ES..",
 	   "TransfereAccountNumberFrom":"ES..",
@@ -36,9 +73,7 @@ Send Transfer:
 
 ```
 
-```Java
 
-```
 
 ## Built With
 
@@ -46,6 +81,8 @@ Send Transfer:
 * [RESTEasy](https://resteasy.github.io/) - Api RESTful Library
 * [JSON](https://www.json.org) - Data interchange format
 * [JUnit](https://junit.org/junit5/) - Unit testing framework 
+* [Log4j](https://logging.apache.org/log4j/2.x/) -  Java-based logging utility 
+
 
 ## Contributing
 

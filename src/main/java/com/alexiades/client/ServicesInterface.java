@@ -1,7 +1,7 @@
 
 package com.alexiades.client;
 
-import com.alexiades.model.Product;
+import com.alexiades.model.Transaction;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -13,22 +13,22 @@ public interface ServicesInterface {
     @GET
     @Path("/getinfo")
     @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    Product getinfo(@QueryParam("trans") String trans);
+    Transaction getinfo(@QueryParam("trans") String trans);
 
     @GET
     @Path("/listransfers")
     @Produces({ "application/json" })
-    List<Product> listransfers();
+    List<Transaction> listransfers();
 
     @POST
     @Path("/addtransfer")
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    Response addtransfer(Product movie);
+    Response addtransfer(Transaction movie);
 
     @PUT
     @Path("/updatetransfer")
     @Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    Response updatetransfer(Product movie);
+    Response updatetransfer(Transaction movie);
 
     @DELETE
     @Path("/deletetransfer")
