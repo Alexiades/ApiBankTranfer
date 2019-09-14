@@ -3,17 +3,27 @@ package com.alexiades.model;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Transaction {
 
-    @JsonProperty(required = true)
-    private String currencyCode;
+
+    @JsonIgnore
+    private long transferId ;
 
     @JsonProperty(required = true)
-    private BigDecimal amount;
+    private String firstName;
+
+    @JsonProperty(required = true)
+    private String lastName;
+
+    @JsonProperty(required = true)
+    private String currencyCode;
 
     @JsonProperty(required = true)
     private Long fromAccountId;
@@ -21,25 +31,43 @@ public class Transaction {
     @JsonProperty(required = true)
     private Long toAccountId;
 
+    @JsonProperty(required = true)
+    private Date transdate;
 
+    @JsonProperty(required = true)
+    private BigDecimal amount;
 
+    @JsonProperty(required = true)
+    private String comment;
 
     public Transaction() {
     }
 
-    public Transaction(String currencyCode, BigDecimal amount, Long fromAccountId, Long toAccountId) {
+    public Transaction(String firstName,String lastName,String currencyCode, Long fromAccountId, Long toAccountId,Date transdate,BigDecimal amount,String comment) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.currencyCode = currencyCode;
-        this.amount = amount;
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
+        this.transdate = transdate;
+        this.amount = amount;
+        this.comment = comment;
+    }
+
+    public long getTransferId() {
+        return transferId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     public String getCurrencyCode() {
         return currencyCode;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
     }
 
     public Long getFromAccountId() {
@@ -50,7 +78,17 @@ public class Transaction {
         return toAccountId;
     }
 
+    public Date getTransdate() {
+        return transdate;
+    }
 
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public String getComment() {
+        return comment;
+    }
 
 @Override
     public boolean equals(Object o) {
@@ -82,8 +120,14 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" + "currencyCode='" + currencyCode + '\'' + ", amount=" + amount + ", fromAccountId="
-                + fromAccountId + ", toAccountId=" + toAccountId + '}';
+        return transferId + "{"+ "firstName='" + firstName + '\''
+                + ", lastName=" + lastName
+                + ", currencyCode='" + currencyCode
+                + ", fromAccountId=" + fromAccountId
+                + ", toAccountId=" + toAccountId
+                + ", transdate='" + transdate
+                + ", amount='" + amount
+                + ", comment=" + comment + '}';
     }
 
 }

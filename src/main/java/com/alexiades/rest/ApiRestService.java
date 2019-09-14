@@ -15,6 +15,8 @@ import com.fasterxml.jackson.databind.node.NullNode;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 //Sets the path to base URL + /
 //example http://localhost:9090/rest/hello/JavaCodeGeeks?queryParameter=Enjoy%20RESTEasy
@@ -24,12 +26,15 @@ public class ApiRestService {
 
     //http://localhost:9090/rest/account/?queryParameter=account
     @GET
-    @Path("/account/{pathParameter}")
+    @Path("/getaccounts/{pathParameter}")
     @Produces("application/json")
     public String getAccount(@PathParam("pathParameter") long account) throws IOException {
 
+        File sampleFile = new File(getClass().getResource("/json_account.json").getFile());
+        String sampleFileContent = new Scanner(sampleFile).useDelimiter("\\Z").next();
+
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode data = mapper.readTree(new File("E:\\Desarrollo\\Proyectos\\ApiBankTransfer\\src\\main\\java\\com\\alexiades\\rest\\json_account.json"));
+        JsonNode data = mapper.readTree(sampleFileContent);
         JsonNode accountNode = data.path(String.valueOf(account));
 
         if (!accountNode.isMissingNode()) {        // if "name" node is exist
@@ -38,6 +43,18 @@ public class ApiRestService {
         }else
             return "fail";
     }
+
+
+    @POST
+    @Path("/addaccounts")
+    @Consumes("application/json")
+    public Response createProductInJSON(Account acc) {
+
+        String result = "Account created : " + acc.getAccountId();
+        return Response.status(201).entity(result).build();
+
+    }
+
 
 /*
     //http://localhost:9090/rest/transfer/123

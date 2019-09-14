@@ -60,15 +60,15 @@ Send Transfer:
 
  ```
 	{
-	   "FirstName":"Alex",
-	   "LastName":"Alexiades",
-	   "Currency":"EUR",
+	   "firstName":"Alex",
+	   "lastName":"Alexiades",
+	   "currencyCode":"EUR",
 	   "Country":"Spain",
-	   "TransfereAccountNumberTo":"ES..",
-	   "TransfereAccountNumberFrom":"ES..",
-	   "TransferDate":"Sysdate"
-       "Amount":"9999"
-       "Comment":"You own it"
+	   "fromAccountId":"ES..",
+	   "toAccountId":"ES..",
+	   "transdate":"Sysdate"
+       "amount":"9999"
+       "comment":"You own it"
 	}
 
 ```

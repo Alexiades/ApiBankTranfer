@@ -15,21 +15,20 @@ import java.net.URL;
 
             try {
 
-                URL url = new URL("http://localhost:9090/rest/hello/post");
+                URL url = new URL("http://localhost:9090/rest/addaccounts/");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setDoOutput(true);
                 conn.setRequestMethod("POST");
                 conn.setRequestProperty("Content-Type", "application/json");
 
-                String input = "{\"qty\":100,\"name\":\"iPad 4\"}";
+                String input = "{\"4563\":{\"userName\":\"user5\",\"balance\":20,\"currencyCode\":\"EUR\"}}";
 
                 OutputStream os = conn.getOutputStream();
                 os.write(input.getBytes());
                 os.flush();
 
                 if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                    throw new RuntimeException("Failed : HTTP error code : "
-                            + conn.getResponseCode());
+                    throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
                 }
 
                 BufferedReader br = new BufferedReader(new InputStreamReader(
