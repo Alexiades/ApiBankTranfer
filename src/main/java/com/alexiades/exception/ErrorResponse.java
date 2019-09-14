@@ -11,5 +11,3 @@ public class ErrorResponse {
         this.errorCode = errorCode;
     }
 }
-
-

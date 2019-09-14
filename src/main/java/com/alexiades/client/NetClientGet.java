@@ -9,12 +9,11 @@ import java.net.URL;
 
 public class NetClientGet {
 
-    // http://localhost:8080/RESTfulExample/json/product/get
+    // http://localhost:9090/rest/account
     public static void main(String[] args) {
 
         try {
-
-            URL url = new URL("http://localhost:9090/rest/hello/get");
+            URL url = new URL("http://localhost:9090/rest/account");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");

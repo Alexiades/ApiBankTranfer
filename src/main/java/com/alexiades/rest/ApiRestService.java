@@ -1,88 +1,48 @@
 package com.alexiades.rest; // Note your package will be {{ groupId }}.rest
 
 import com.alexiades.model.Transaction;
+import com.alexiades.model.Account;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import com.alexiades.exception.CustomException;
 import com.alexiades.model.CurrencyValidator;
 import com.alexiades.model.Transaction;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.NullNode;
 
 import java.io.File;
 import java.io.IOException;
 
-//Sets the path to base URL + /hello
+//Sets the path to base URL + /
 //example http://localhost:9090/rest/hello/JavaCodeGeeks?queryParameter=Enjoy%20RESTEasy
 
 @Path("/")
 public class ApiRestService {
-/*
-    private Map<String, Product> inventory = new HashMap<String, Product>();
 
+    //http://localhost:9090/rest/account/?queryParameter=account
     @GET
-    @Path("/getinfo")
-    @Produces({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
-    public Transfer movieByImdbId(@QueryParam("imdbId") String imdbId) {
-        if (inventory.containsKey(imdbId)) {
-            return inventory.get(imdbId);
-        } else {
-            return null;
-        }
-    }
-*/
-// It's works, I need now to think about the structure of the api
-//example http://localhost:9090/rest/hello/JavaCodeGeeks?queryParameter=Enjoy%20RESTEasy
-//response :
-/*
-    @GET
-    @Path("/{pathParameter}")
-    public Response responseMsg( @PathParam("pathParameter") String pathParameter,
-                                 @DefaultValue("Nothing to say") @QueryParam("queryParameter") String queryParameter) {
-
-        String response = "Hello from: " + pathParameter + " : " + queryParameter;
-
-        return Response.status(200).entity(response).build();
-    }
-*/
-
-    //http://localhost:9090/rest/hello/get
-    @GET
-    @Path("/account")
+    @Path("/account/{pathParameter}")
     @Produces("application/json")
-    public String getAccount(@DefaultValue("Nothing to say") @QueryParam("queryParameter") String account) {
-        String response = "Hello from: " + account;
+    public String getAccount(@PathParam("pathParameter") long account) throws IOException {
 
-                    //Transaction transaction = new Transaction();
-                    Transaction transaction = new Transaction();
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode data = mapper.readTree(new File("E:\\Desarrollo\\Proyectos\\ApiBankTransfer\\src\\main\\java\\com\\alexiades\\rest\\json_account.json"));
+        JsonNode accountNode = data.path(String.valueOf(account));
 
-
-                    return transaction.toString();
-
-
+        if (!accountNode.isMissingNode()) {        // if "name" node is exist
+            Account ac = new Account( account,accountNode.path("userName").asText(),accountNode.path("balance").asDouble(), accountNode.path("currencyCode").asText());
+           return ac.toString();
+        }else
+            return "fail";
     }
 
-    //way 1
-
-        /*
-Example
-
-    var data = {
-            "1": {
-        "account": "11"
-    },
-            "2": {
-        "account": "22"
-    }
-};
-*/
-
-
-
-    //http://localhost:9090/rest/hello/get
+/*
+    //http://localhost:9090/rest/transfer/123
     @POST
-    @Path("/transfer")
+    @Path("/transfer/{pathParameter}")
     @Produces("application/json")
     public String postTransfer() {
 
@@ -92,8 +52,8 @@ Example
 
         {
             try {
-                JsonNode data = objectMapper.readTree("target/json_db.json");
-                if (accoutExist(data,account) == true) {
+                JsonNode data = objectMapper.readTree("target/json_account.json");
+                if (accoutExist(data, account) == true) {
 
                     return transaction.toString();
 
@@ -108,15 +68,22 @@ Example
 
     }
 
-    public boolean accoutExist(JsonNode d,String acc) {
+    public boolean accoutExist(JsonNode d, String acc) {
 
-        d.get(acc);
 
-        return true;
+        // Get id
+        long id = d.path("id").asLong();
+        System.out.println("id : " + id);
 
+        if (id != null) {
+
+            return true;
+        } else
+            return false;
     }
+*/
 
-     //way 2
+    //way 2
 
     @Path("/transaction")
     @Produces(MediaType.APPLICATION_JSON)
@@ -154,6 +121,7 @@ Example
         }
     }
 }
+
 
 
 
