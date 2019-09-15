@@ -13,7 +13,7 @@ public class NetClientGet {
     public static void main(String[] args) {
 
         try {
-            URL url = new URL("http://localhost:9090/rest/account");
+            URL url = new URL("http://localhost:9090/rest/getaccounts/54635");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");

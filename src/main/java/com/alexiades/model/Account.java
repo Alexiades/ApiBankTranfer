@@ -3,8 +3,6 @@ package com.alexiades.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-
-
 public class Account {
 
         @JsonIgnore
@@ -22,12 +20,6 @@ public class Account {
 
 
         public Account() {}
-
-        public Account(String userName,Double balance, String currencyCode) {
-            this.userName = userName;
-            this.balance = balance;
-            this.currencyCode = currencyCode;
-        }
 
         public Account(long accountId, String userName,Double balance, String currencyCode) {
             this.accountId = accountId;
@@ -75,11 +67,11 @@ public class Account {
 
         @Override
         public String toString() {
-            return accountId + "{" +
-                    "userName=" + userName +
-                    ", balance='" + balance + '\'' +
-                    ", currencyCode='" + currencyCode + '\'' +
-                    '}';
+            return "{"+accountId + ":{" +
+                    "userName:"+"\"" + userName+ "\"" +
+                    ", balance:" + balance  +
+                    ", currencyCode:"+"\"" + currencyCode + "\"" +
+                    "}}";
         }
     }
 
