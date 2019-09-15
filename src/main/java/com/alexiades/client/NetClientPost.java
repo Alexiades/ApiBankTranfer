@@ -1,24 +1,17 @@
 package com.alexiades.client;
 
-import com.alexiades.model.Account;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
+import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.net.URLConnection;
+
+import com.alexiades.model.Account;
+import org.json.JSONObject;
 
 
+public class NetClientPost {
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.HashMap;
-
-    public class NetClientPost
-    {
 
         static class NodeAccount {
             public int accountid;
@@ -34,16 +27,17 @@ import java.util.HashMap;
             }
         }
 
-        // http://localhost:8080/RESTfulExample/json/product/post
         public static void main(String[] args) {
+        String string = "";
 
-            try {
+        Account account = new Account(43524, "Hook", 10.2, "EUR");
 
-                URL url = new URL("http://localhost:9090/rest/addaccounts");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setDoOutput(true);
-                conn.setRequestMethod("POST");
-                conn.setRequestProperty("Content-Type", "application/json");
+        string = account.toString();
+
+
+            JSONObject jsonObject = new JSONObject(string);
+           // System.out.println(jsonObject);
+
 /*
                 String key = "test";
                 NodeAccount node =
@@ -57,46 +51,34 @@ import java.util.HashMap;
                     accounts.put(key, );
                 }
 */
-                //  String input = "{\"4563\":{\"userName\":\"user5\",\"balance\":20,\"currencyCode\":\"EUR\"}}";
+        //  String input = "{\"4563\":{\"userName\":\"user5\",\"balance\":20,\"currencyCode\":\"EUR\"}}";
 
-                Account account = new Account(43524, "Hook", 10.2, "EUR");
 
-                /*
-                 *  Alternatively you can use this simple String to send
-                 *  instead of using a Student instance
-                 *
-                 *  String jsonString = "{\"id\":12,\"firstName\":\"Catain\",\"lastName\":\"Hook\",\"age\":10}";
-                 */
 
-                String input = account.toString();
-                //Send request
-                OutputStream os = conn.getOutputStream();
-                os.write(input.getBytes());
-                os.flush();
-                //Get response
-                if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
-                    throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+
+            // Step2: Now pass JSON File Data to REST Service
+            try {
+                URL url = new URL("http://localhost:9090/rest/postaccounts");
+                URLConnection connection = url.openConnection();
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setConnectTimeout(5000);
+                connection.setReadTimeout(5000);
+                OutputStreamWriter out = new OutputStreamWriter(connection.getOutputStream());
+                out.write(jsonObject.toString());
+                out.close();
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+                while (in.readLine() != null) {
                 }
-
-                BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
-
-                String output;
-                System.out.println("Output from Server .... \n");
-                while ((output = br.readLine()) != null) {
-
-                    System.out.println(output);
-                }
-
-                conn.disconnect();
-
-            } catch (MalformedURLException e) {
-
-                e.printStackTrace();
-            } catch (IOException e) {
-
-                e.printStackTrace();
-
+                System.out.println("\nREST Service Invoked Successfully..");
+                System.out.println(out.toString());
+                in.close();
+            } catch (Exception e) {
+                System.out.println("\nError while calling REST Service");
+                System.out.println(e);
             }
-        }
 
     }
+}

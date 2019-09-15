@@ -8,16 +8,26 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Scanner;
+
+
 
 public class FileJson {
 
-    // boolean en el futuro
-    public static void insertIntoFile(String stringpost) throws FileNotFoundException, JsonProcessingException {
+    /**
+     *
+     * Insert a NodeJSON from a string that have been pull in the API.
+     *
+     * @param stringpost Insert a JSON sting to be parse
+     * @param file get the name of the file where we are going to insert the NodeJSON
+     *
+     * @return The method return a true if the file is updated, other case it will return a false
+     */
+
+
+    public static boolean insertIntoFile(String stringpost,String file) throws FileNotFoundException, JsonProcessingException {
         //extraigo el fichero
-        File jsonFile=new File(FileJson.class.getResource("/json_account.json").getFile());
+        File jsonFile=new File(FileJson.class.getResource(file).getFile());
         String jsonFileContent=new Scanner(jsonFile).useDelimiter("\\Z").next();
 
         //creo el nodo del fichero
@@ -35,6 +45,9 @@ public class FileJson {
         .put("userName",jsonObjectAcc.getString("userName"))
         .put("balance",jsonObjectAcc.getString("balance"))
         .put("currencyCode",jsonObjectAcc.getString("currencyCode"));
+
+        return true;
+
         }
 
 

@@ -21,6 +21,7 @@ public class CurrencyValidator<INSTANCE> {
     public static final BigDecimal zeroAmount = new BigDecimal(0).setScale(4, RoundingMode.HALF_EVEN);
 
 
+
     /**
      * @param inputCcyCode String Currency code to be validated
      * @return true if currency code is valid ISO code, false otherwise

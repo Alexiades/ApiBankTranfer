@@ -23,10 +23,10 @@ public class ApiRestServiceTest {
     }
     // One of our actual tests!
     @Test
-    public void helloTest() {
+    public void accountTest() {
         try {
         //    Specify the endpoint we want to test, for our example, we use "/hello"
-            MockHttpRequest request = MockHttpRequest.get("/hello/get");
+            MockHttpRequest request = MockHttpRequest.get("/getaccounts/54635");
             MockHttpResponse response = new MockHttpResponse();
             // Invoke the request
             dispatcher.invoke(request, response);

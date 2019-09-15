@@ -1,4 +1,4 @@
-package com.alexiades.app;// {{ groupId}}.app
+package com.alexiades.app;
 
 // import the rest service you created!
 import com.alexiades.rest.ApiRestService;

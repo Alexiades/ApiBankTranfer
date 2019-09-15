@@ -12,6 +12,8 @@ mvn exec:java
 | HTTP METHOD | PATH | USAGE |
 | -----------| ------ | ------ |
 | GET | /account/{accountId} | get account by accountId | 
+| POST | /account | post account by accountId | 
+| GET | /transaction/{transacctionId} | get transaction between 2 user accounts | 
 | POST | /transaction | perform transaction between 2 user accounts | 
 
 
@@ -39,19 +41,23 @@ Send Transfer:
  
  ##### User : 
  ```sh
- {  
-   "userName":"test1",
-   "emailAddress":"test1@gmail.com"
- } 
+ {"userid":
+    {  
+       "userName":"test1",
+       "emailAddress":"test1@gmail.com"
+     } 
+}
  ```
  
 ##### User Account: : 
 
 ```sh
-{  
-   "userName":"test1",
-   "balance":10.0000,
-   "currencyCode":"GBP"
+{"accountid":
+    {  
+       "userName":"test1",
+       "balance":10.0000,
+       "currencyCode":"GBP"
+    }                           
 } 
 ```
 
@@ -59,7 +65,8 @@ Send Transfer:
 #### User Transaction:
 
  ```
-	{
+{"transferid":
+    {  
 	   "firstName":"Alex",
 	   "lastName":"Alexiades",
 	   "currencyCode":"EUR",
@@ -70,7 +77,7 @@ Send Transfer:
        "amount":"9999"
        "comment":"You own it"
 	}
-
+}
 ```
 
 
@@ -79,6 +86,7 @@ Send Transfer:
 
 * [Java](https://maven.apache.org/) - Dependency Management
 * [RESTEasy](https://resteasy.github.io/) - Api RESTful Library
+* [Jackson](https://en.wikipedia.org/wiki/Jackson_(API)) - JSON processor for Java.
 * [JSON](https://www.json.org) - Data interchange format
 * [JUnit](https://junit.org/junit5/) - Unit testing framework 
 * [Log4j](https://logging.apache.org/log4j/2.x/) -  Java-based logging utility 
