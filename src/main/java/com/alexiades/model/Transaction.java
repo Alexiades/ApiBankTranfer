@@ -14,7 +14,7 @@ public class Transaction {
 
 
     @JsonIgnore
-    private long transferId ;
+    private String transferId ;
 
     @JsonProperty(required = true)
     private String firstName;
@@ -54,7 +54,12 @@ public class Transaction {
         this.comment = comment;
     }
 
-    public long getTransferId() {
+
+
+    public String getTransferId() {
+
+       transferId = getFirstName()+getTransdate().toString();
+
         return transferId;
     }
 
